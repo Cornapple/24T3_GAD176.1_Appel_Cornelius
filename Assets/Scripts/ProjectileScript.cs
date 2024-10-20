@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
+    #region FUNCTIONS
     //references ingame object/prefab which is a bullet
     public GameObject projectile;
 
@@ -27,6 +28,9 @@ public class ProjectileScript : MonoBehaviour
 
     public bool allowInvoke = true;
 
+    #endregion
+
+    #region UPDATE AND AWAKE
     private void Update()
     {
         MyInput();
@@ -54,7 +58,9 @@ public class ProjectileScript : MonoBehaviour
         readyToShoot = true;
 
     }
+    #endregion
 
+    #region INPUT
     private void MyInput()
     {
         Debug.Log("MyInput function has been called");
@@ -87,9 +93,10 @@ public class ProjectileScript : MonoBehaviour
         {
             return;
         }
-    }  
-          
+    }
+    #endregion
 
+    #region SHOOTING  
     private void Shoot()
     {
         Debug.Log("Shoot function is active");
@@ -145,7 +152,9 @@ public class ProjectileScript : MonoBehaviour
             Invoke("Shoot", timeBetweenShots);
         }
     }
+    #endregion
 
+    #region RELOADING   
     private void ResetShot()
     {
         Debug.Log("ResetShot function is active");
@@ -174,4 +183,5 @@ public class ProjectileScript : MonoBehaviour
         reloading = false;
     }
 
+    #endregion
 }
