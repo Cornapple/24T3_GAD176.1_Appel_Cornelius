@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using TMPro;
+
 
 public class ProjectileScript : MonoBehaviour
 {
@@ -33,7 +33,9 @@ public class ProjectileScript : MonoBehaviour
 
         //set up display Information
         if (ammunitionDisplay != null)
-            ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
+            Debug.Log("Ammunition is null");
+            //ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
+            ammunitionDisplay.SetText(bulletsInMagazine + " / " + MagazineSize);
     }
     private void Awake()
     {
@@ -45,6 +47,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void MyInput()
     {
+        Debug.Log("MyInput function has been called");
         if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
@@ -53,17 +56,28 @@ public class ProjectileScript : MonoBehaviour
             bulletsInMagazine = 0;
 
             Shoot();
+            Debug.Log("Shoot function has been called");
         }
 
         //calls reloading function if magazine is no completely full
-        if (Input.GetKeyDown(KeyCode.R) && bulletsInMagazine < MagazineSize && !reloading) Reload();
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInMagazine < MagazineSize && !reloading)
+        {
+            Reload();
+            Debug.Log("Reload function has bee called");
+        }
 
         //if magazine is completely empty and you try to shoot reload is called
-        if (readyToShoot && shooting && !reloading && bulletsInMagazine <= 0) Reload();
-    }
+        if (readyToShoot && shooting && !reloading && bulletsInMagazine <= 0)
+        {
+            Reload();
+            Debug.Log("Reload function has been called");
+        }
+    }  
+          
 
     private void Shoot()
     {
+        Debug.Log("Shoot function is active");
         readyToShoot = false;
 
         Ray ray = fpsCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -73,7 +87,7 @@ public class ProjectileScript : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
             targetPoint = hit.point;
         else
-            targetPoint = ray.GetPoint(75);
+            targetPoint = ray.GetPoint(100);
 
         //direction from attackpoint to targetpoint
         Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
@@ -91,8 +105,13 @@ public class ProjectileScript : MonoBehaviour
         currentProjectile.transform.forward = directionWithoutSpread.normalized;
 
         //Add force to projectile
+
+
+
         // normal projectiles do not need upward force
-        currentProjectile.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+        currentProjectile.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse); // I assume this is the problem with lack of force
+
+
         currentProjectile.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.up * upwardForce, ForceMode.Impulse);
 
         bulletsInMagazine--;
@@ -114,18 +133,25 @@ public class ProjectileScript : MonoBehaviour
 
     private void ResetShot()
     {
+        Debug.Log("ResetShot function is active");
         readyToShoot = true;
         allowInvoke = true;
     }
 
     private void Reload()
     {
+        Debug.Log("Reload function is active");
         reloading = true;
-        Invoke("ReloadFinished", reloadTime);
+        //Invoke("ReloadFinished", reloadTime);
+        if (reloading == true)
+        {
+            ReloadingFinished();
+        }
     }
 
     private void ReloadingFinished()
     {
+        Debug.Log("ReloadingFinished function is active");
         bulletsInMagazine = MagazineSize;
         reloading = false;
     }
