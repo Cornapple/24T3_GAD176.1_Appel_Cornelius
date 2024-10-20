@@ -34,8 +34,18 @@ public class ProjectileScript : MonoBehaviour
         //set up display Information
         if (ammunitionDisplay != null)
             Debug.Log("Ammunition is null");
-            //ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
-            ammunitionDisplay.SetText(bulletsInMagazine + " / " + MagazineSize);
+        //ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
+        ammunitionDisplay.SetText(bulletsInMagazine + " / " + MagazineSize);
+
+        if (bulletsInMagazine <= 21 && reloading)
+        {
+            bulletsInMagazine = 20;
+        }
+        else if (bulletsInMagazine >= 1)
+        {
+            MyInput();
+        }
+
     }
     private void Awake()
     {
@@ -53,7 +63,7 @@ public class ProjectileScript : MonoBehaviour
 
         if (readyToShoot && shooting && !reloading && bulletsInMagazine > 0)
         {
-            bulletsInMagazine = 0;
+            //bulletsInMagazine = 20;
 
             Shoot();
             Debug.Log("Shoot function has been called");
@@ -66,11 +76,16 @@ public class ProjectileScript : MonoBehaviour
             Debug.Log("Reload function has bee called");
         }
 
-        //if magazine is completely empty and you try to shoot reload is called
+        //if magazine is completely empty and you try to shoot, reload is called
         if (readyToShoot && shooting && !reloading && bulletsInMagazine <= 0)
         {
             Reload();
             Debug.Log("Reload function has been called");
+        }
+
+        if (bulletsInMagazine >= 0 )
+        {
+            return;
         }
     }  
           
@@ -106,7 +121,7 @@ public class ProjectileScript : MonoBehaviour
 
         //Add force to projectile
 
-
+        
 
         // normal projectiles do not need upward force
         currentProjectile.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse); // I assume this is the problem with lack of force
@@ -114,7 +129,7 @@ public class ProjectileScript : MonoBehaviour
 
         currentProjectile.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.up * upwardForce, ForceMode.Impulse);
 
-        bulletsInMagazine--;
+        bulletsInMagazine = bulletsInMagazine - bulletsShot; ///////
         bulletsShot++;
 
         //invokes the reset of shooting
@@ -142,6 +157,7 @@ public class ProjectileScript : MonoBehaviour
     {
         Debug.Log("Reload function is active");
         reloading = true;
+
         //Invoke("ReloadFinished", reloadTime);
         if (reloading == true)
         {
@@ -153,6 +169,8 @@ public class ProjectileScript : MonoBehaviour
     {
         Debug.Log("ReloadingFinished function is active");
         bulletsInMagazine = MagazineSize;
+
+
         reloading = false;
     }
 
