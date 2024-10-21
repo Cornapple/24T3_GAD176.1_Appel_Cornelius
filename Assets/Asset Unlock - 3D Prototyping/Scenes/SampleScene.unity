@@ -4319,7 +4319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1122964723992546, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-  shootForce: 200
+  shootForce: 100
   upwardForce: 0
   reloadTime: 1
   timeBetweenShots: 0.3
@@ -4331,7 +4331,6 @@ MonoBehaviour:
   fpsCamera: {fileID: 968970524}
   attackPoint: {fileID: 571317541}
   ammunitionDisplay: {fileID: 1978981137}
-  allowInvoke: 1
 --- !u!1001 &1886076269
 PrefabInstance:
   m_ObjectHideFlags: 0

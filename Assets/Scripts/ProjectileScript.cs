@@ -9,14 +9,13 @@ public class ProjectileScript : MonoBehaviour
     public GameObject projectile;
 
     //the force of the bullet
-    public float shootForce, upwardForce;
+    [SerializeField] private float shootForce, upwardForce;
 
     //gun statistics
-    public float reloadTime, timeBetweenShots, timeBetweenShooting, spread;
-    public int MagazineSize, bulletsPerClick;
+    [SerializeField] private float reloadTime, timeBetweenShots, timeBetweenShooting, spread;
+    [SerializeField] private int MagazineSize, bulletsPerClick;
+    [SerializeField] private bool allowButtonHold;
     int bulletsInMagazine, bulletsShot;
-    public bool allowButtonHold;
-
     bool shooting, readyToShoot, reloading;
 
     //reference to game camera and point where bullets will hit (centre of screen)
@@ -41,9 +40,9 @@ public class ProjectileScript : MonoBehaviour
         //ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
         ammunitionDisplay.SetText(bulletsInMagazine + " / " + MagazineSize);
 
-        if (bulletsInMagazine <= 21 && reloading)
+        if (bulletsInMagazine <= MagazineSize && reloading)
         {
-            bulletsInMagazine = 20;
+            bulletsInMagazine = MagazineSize;
         }
         else if (bulletsInMagazine >= 1)
         {
@@ -142,14 +141,16 @@ public class ProjectileScript : MonoBehaviour
         //invokes the reset of shooting
         if (allowInvoke)
         {
-            Invoke("ResetShot", timeBetweenShooting);
-            allowInvoke = false;
+            //Invoke("ResetShot", timeBetweenShooting);
+            //allowInvoke = false;
+            ResetShot();
         }
 
         //for more than one bullet per click
         if (bulletsShot < bulletsPerClick && bulletsInMagazine > 0)
         {
-            Invoke("Shoot", timeBetweenShots);
+            //Invoke("Shoot", timeBetweenShots);
+            Shoot();
         }
     }
     #endregion
@@ -159,7 +160,7 @@ public class ProjectileScript : MonoBehaviour
     {
         Debug.Log("ResetShot function is active");
         readyToShoot = true;
-        allowInvoke = true;
+        //allowInvoke = true;
     }
 
     private void Reload()
@@ -178,8 +179,6 @@ public class ProjectileScript : MonoBehaviour
     {
         Debug.Log("ReloadingFinished function is active");
         bulletsInMagazine = MagazineSize;
-
-
         reloading = false;
     }
 
