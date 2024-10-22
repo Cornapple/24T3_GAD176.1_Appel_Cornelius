@@ -1,8 +1,12 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// move all shared functions from pistol to baseweapon
+/// 
+/// </summary>
 
-public class ProjectileScript : MonoBehaviour
+public class Pistol : BaseWeapon
 {
     #region FUNCTIONS
     //references ingame object/prefab which is a bullet
@@ -15,8 +19,8 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] private float reloadTime, timeBetweenShots, timeBetweenShooting, spread;
     [SerializeField] private int MagazineSize, bulletsPerClick;
     [SerializeField] private bool allowButtonHold;
-    int bulletsInMagazine, bulletsShot;
-    bool shooting, readyToShoot, reloading;
+    [SerializeField] protected int bulletsInMagazine, bulletsShot;
+    public bool shooting, readyToShoot, reloading;
 
     //reference to game camera and point where bullets will hit (centre of screen)
     public Camera fpsCamera;
@@ -29,6 +33,13 @@ public class ProjectileScript : MonoBehaviour
 
     #endregion
 
+
+    private void Start()
+    {
+        Debug.Log(magazineSize);
+
+    }
+
     #region UPDATE AND AWAKE
     private void Update()
     {
@@ -39,6 +50,8 @@ public class ProjectileScript : MonoBehaviour
             Debug.Log("Ammunition is null");
         //ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
         ammunitionDisplay.SetText(bulletsInMagazine + " / " + MagazineSize);
+
+        
 
         if (bulletsInMagazine <= MagazineSize && reloading)
         {
@@ -122,12 +135,13 @@ public class ProjectileScript : MonoBehaviour
         //instantiate projectile
         GameObject currentProjectile = Instantiate(projectile, attackPoint.position, Quaternion.identity);
             
+
         //rotates object to the direction of shooting
         currentProjectile.transform.forward = directionWithoutSpread.normalized;
 
         //Add force to projectile
 
-        
+
 
         // normal projectiles do not need upward force
         currentProjectile.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse); // I assume this is the problem with lack of force
