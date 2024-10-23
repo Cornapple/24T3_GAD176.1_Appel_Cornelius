@@ -18,7 +18,7 @@ public class Pistol : BaseWeapon
     #region UPDATE AND AWAKE
     private void Update()
     {
-
+        //Call a function within the base class
         MyInput();
 
         //set up display Information

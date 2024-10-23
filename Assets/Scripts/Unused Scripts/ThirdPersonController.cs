@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//not using this becuase it was not able to be used with the first person perspective I wanted to use
+
+
+
+
+using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;

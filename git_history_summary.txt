@@ -1,0 +1,14 @@
+* b5c8fc7 (HEAD -> main, origin/main, origin/HEAD) imported evidence of inheritance and polymorphism
+* ff2e6f8 meeting with aaron to discuss issues and project
+* 693618f opened scene in UNiversity computer
+* 056e390 further work on movement system
+* 99e68b5 more work on system
+* 1bd8312 work on UI display of ammo
+* bd9f870 Further work on movement and weapons system
+* 91617d6 Base Movement and weapons system complete
+* bfe1b18 Created movement and basic UI
+* 575799c work on first person movement and camera as well as substantial work on the  weapons system
+* 4ea496e foliage added to scene
+* c1011ad 3d asset package added
+* 3eec85f (origin/feature/animations, origin/develop, feature/animations, develop) Beginning Submission
+* 1bd724e Initial commit
