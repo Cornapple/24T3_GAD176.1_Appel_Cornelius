@@ -57,10 +57,8 @@ public class BaseWeapon : MonoBehaviour
         //set up display Information
         if (ammunitionDisplay != null)
             Debug.Log("Ammunition is null"); // evidence of debugging code
-        //ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
+
         ammunitionDisplay.SetText(bulletsInMagazine + " / " + MagazineSize);
-
-
 
         if (bulletsInMagazine <= MagazineSize && reloading)
         {
@@ -75,7 +73,6 @@ public class BaseWeapon : MonoBehaviour
 
     #endregion
 
-
     #region INPUT
     public void MyInput() // Evidence of classes
     {
@@ -85,8 +82,6 @@ public class BaseWeapon : MonoBehaviour
 
         if (readyToShoot && shooting && !reloading && bulletsInMagazine > 0)
         {
-            //bulletsInMagazine = 20;
-
             Shoot();
             Debug.Log("Shoot function has been called");
         }
@@ -115,7 +110,6 @@ public class BaseWeapon : MonoBehaviour
     #region SHOOTING  
     public virtual void Shoot()
     {
-
         //I attempted to remove Invokes from a script, which I originally used to fix
         //a problem with the shooting via a tutorial, but never really understood them
 
@@ -124,15 +118,12 @@ public class BaseWeapon : MonoBehaviour
         //invokes the reset of shooting
         if (allowInvoke)
         {
-            //Invoke("ResetShot", timeBetweenShooting);
-            //allowInvoke = false;
             ResetShot();
         }
 
         //for more than one bullet per click
         if (bulletsShot < bulletsPerClick && bulletsInMagazine > 0)
         {
-            //Invoke("Shoot", timeBetweenShots);
             Shoot();
         }
     }
@@ -145,7 +136,6 @@ public class BaseWeapon : MonoBehaviour
     {
         Debug.Log("ResetShot function is active");
         readyToShoot = true;
-        //allowInvoke = true;
     }
 
     public void Reload()
@@ -153,7 +143,6 @@ public class BaseWeapon : MonoBehaviour
         Debug.Log("Reload function is active");
         reloading = true;
 
-        //Invoke("ReloadFinished", reloadTime);
         if (reloading == true)
         {
             ReloadingFinished();
@@ -163,7 +152,6 @@ public class BaseWeapon : MonoBehaviour
     public void ReloadingFinished()
     {
         Debug.Log("ReloadingFinished function is active");
-        //bulletsInMagazine = MagazineSize;
         reloading = false;
     }
 
