@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -24,7 +25,7 @@ public class PlayerCamera : MonoBehaviour
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * sensY;
 
-        yRotation += mouseX;
+        yRotation += mouseX; // Evidence of Addition
 
         //Couldn't get Yaxis to work can only look horizontally
         //xRotation -= mouseY;

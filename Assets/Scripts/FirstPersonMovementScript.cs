@@ -1,3 +1,8 @@
+//this movement script was greatly devised using the following youtube tutorial
+//in. (2022, February 7). FIRST PERSON MOVEMENT in 10 MINUTES - Unity Tutorial. YouTube. https://www.youtube.com/watch?v=f473C43s8nE
+
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

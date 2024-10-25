@@ -11,9 +11,7 @@ public class Pistol : BaseWeapon
 
     private void Start()
     {
-        ////MagazineSize = pistolMagazineSize;
         pistolMagazineSize = 20;
-        //bulletsInMagazine = pistolMagazineSize;
     }
     #region UPDATE AND AWAKE
     private void Update()
@@ -22,12 +20,10 @@ public class Pistol : BaseWeapon
         MyInput();
 
         //set up display Information
-        if (ammunitionDisplay != null)
+        if (ammunitionDisplay != null) // Evidence of null checks
             Debug.Log(" Pistol Ammunition is null");
-        //ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
+
         ammunitionDisplay.SetText(bulletsInMagazine + " / " + pistolMagazineSize);
-
-
 
         if (bulletsInMagazine <= pistolMagazineSize && reloading)
         {
@@ -41,12 +37,12 @@ public class Pistol : BaseWeapon
     }
     private void Awake()
     {
-        bulletsInMagazine = MagazineSize;
+ 
         ReloadingFinished();
         readyToShoot = true;
     }
 
-    public override void Shoot()
+    public override void Shoot() //Evidence of Virtual/Overide Keywords
     {
         Debug.Log("pistol Shoot function is active");
         readyToShoot = false;
@@ -61,7 +57,7 @@ public class Pistol : BaseWeapon
             targetPoint = ray.GetPoint(100);
 
         //direction from attackpoint to targetpoint
-        Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+        Vector3 directionWithoutSpread = targetPoint - attackPoint.position; // Evidence of Subtraction
 
         //direction from attackpoint to targetpoint with spread
         float x = Random.Range(-spread, spread);
@@ -83,14 +79,11 @@ public class Pistol : BaseWeapon
         pistolBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse); // I assume this is the problem with lack of force
 
 
-        pistolBullet.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.up * upwardForce, ForceMode.Impulse);
+        pistolBullet.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.up * upwardForce, ForceMode.Impulse); //Evidence of magnitude
 
-        bulletsInMagazine = bulletsInMagazine - bulletsShot; ///////
+        bulletsInMagazine = bulletsInMagazine - bulletsShot; 
         bulletsShot++;
     }
-
-
-
 }
 
 #endregion

@@ -1,3 +1,8 @@
+///this first weaposn system was greatly devised from the following youtube tutorial.
+///How. (2020, April 15). How to make ALL kinds of GUNS with just ONE script! (Unity3d tutorial). YouTube. https://www.youtube.com/watch?v=bqNW08Tac0Y
+///I decided not to use it as it didn't have enough of my own work in it and it was using
+///raycasts without prefabs, which is what I wanted to use
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

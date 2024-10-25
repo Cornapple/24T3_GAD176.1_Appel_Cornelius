@@ -1,4 +1,5 @@
-﻿//not using this becuase it was not able to be used with the first person perspective I wanted to use
+﻿//this script was provided by the Project Unity Package
+//not using this becuase I was unable to change it to the first person perspective I wanted to use
 
 
 

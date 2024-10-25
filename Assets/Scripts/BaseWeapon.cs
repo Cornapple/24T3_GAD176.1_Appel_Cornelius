@@ -4,14 +4,14 @@ using TMPro;
 using UnityEngine;
 
 public class BaseWeapon : MonoBehaviour
-{
+{ //Evidence of commenting
     #region FUNCTIONS
     //references ingame object/prefab which is a bullet
-    public GameObject bullet;
+    public GameObject bullet; // Evidence of using public functions and variables
 
     //the force of the bullet
-    [SerializeField] public float 
-        shootForce, 
+    [SerializeField] public float //Evidence of using the [SerialiseField] keyword
+        shootForce, //evidence of naming conventions
         upwardForce;
 
     //gun statistics
@@ -21,7 +21,7 @@ public class BaseWeapon : MonoBehaviour
         timeBetweenShooting, 
         spread;
 
-    [SerializeField] public int
+    [SerializeField] public int //Evidence of using functions
         bulletsPerClick;
 
     protected int MagazineSize;
@@ -29,7 +29,7 @@ public class BaseWeapon : MonoBehaviour
     [SerializeField] public bool 
         allowButtonHold;
 
-    [SerializeField] protected int 
+    [SerializeField] protected int //Evidence of using the 'Protected' access type keyword
         bulletsInMagazine, 
         bulletsShot;
 
@@ -52,11 +52,11 @@ public class BaseWeapon : MonoBehaviour
     #region UPDATE
     private void Update()
     {
-        MyInput();
+        MyInput(); //Evidence of calling a function from a base class
 
         //set up display Information
         if (ammunitionDisplay != null)
-            Debug.Log("Ammunition is null");
+            Debug.Log("Ammunition is null"); // evidence of debugging code
         //ammunitionDisplay.SetText(bulletsInMagazine / bulletsPerClick + " / " + MagazineSize / bulletsPerClick);
         ammunitionDisplay.SetText(bulletsInMagazine + " / " + MagazineSize);
 
@@ -77,7 +77,7 @@ public class BaseWeapon : MonoBehaviour
 
 
     #region INPUT
-    public void MyInput()
+    public void MyInput() // Evidence of classes
     {
         Debug.Log("MyInput function has been called");
         if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
@@ -115,6 +115,10 @@ public class BaseWeapon : MonoBehaviour
     #region SHOOTING  
     public virtual void Shoot()
     {
+
+        //I attempted to remove Invokes from a script, which I originally used to fix
+        //a problem with the shooting via a tutorial, but never really understood them
+
         Debug.Log("Shoot function is active");
 
         //invokes the reset of shooting
@@ -136,6 +140,7 @@ public class BaseWeapon : MonoBehaviour
      
 
     #region RELOADING   
+    // Evidence of following the Singe Responcibility Principle
     public void ResetShot()
     {
         Debug.Log("ResetShot function is active");
