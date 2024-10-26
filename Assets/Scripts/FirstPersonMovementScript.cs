@@ -1,4 +1,5 @@
 //this movement script was greatly devised using the following youtube tutorial
+// the last function is made by me
 //in. (2022, February 7). FIRST PERSON MOVEMENT in 10 MINUTES - Unity Tutorial. YouTube. https://www.youtube.com/watch?v=f473C43s8nE
 
 
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         MyInput();
+        PlayerQuickTurn();
 
         if (grounded)
             rb.drag = groundDrag;
@@ -73,6 +75,18 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+
+    // the quick turn part of the first person movement script was made by me to dmeonstrate use of angles
+
+    public void PlayerQuickTurn()
+    {
+        Debug.Log("player quick turn is called");
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.rotation = Quaternion.Euler (0f, 180f * Time.deltaTime, 0f); //demonstrates use of angles
         }
     }
 }
